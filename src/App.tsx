@@ -1,11 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
+import AuthWatcher from './components/AuthWatcher/AuthWatcher';
 import SignIn from './views/SignIn/SignIn';
 
 function App() {
     return (
         <div className="sticky-notes">
+            <AuthWatcher showState />
+
             <Router>
                 <>
                     <Switch>
