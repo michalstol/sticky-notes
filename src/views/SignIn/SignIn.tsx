@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {} from 'firebase/auth';
-import { Paper, Typography, IconButton, Button, Grid } from '@mui/material';
+import { Paper, Button, Grid } from '@mui/material';
 import { Google as GoogleIcon } from '@mui/icons-material';
 
 import { auth } from '../../app/firebase';
