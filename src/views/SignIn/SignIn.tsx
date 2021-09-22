@@ -5,7 +5,7 @@ import { Paper, Button, Grid, Avatar, Skeleton } from '@mui/material';
 import { Google as GoogleIcon } from '@mui/icons-material';
 
 import { auth } from '../../app/firebase';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useAppSelector } from '../../app/hooks';
 
 import { selectUser } from '../../reduxSlices/authorizedSlice';
 
@@ -43,6 +43,7 @@ export default function SignIn({}: SignInProps): JSX.Element {
                         {!user && (
                             <Skeleton
                                 variant="circular"
+                                animation="wave"
                                 width={96}
                                 height={96}
                             />
