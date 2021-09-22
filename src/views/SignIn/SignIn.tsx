@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {} from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 import { Paper, Button, Grid } from '@mui/material';
 import { Google as GoogleIcon } from '@mui/icons-material';
 
@@ -10,7 +10,15 @@ export const testId = 'view--sign-in';
 
 export interface SignInProps {}
 
+const providers = {
+    google: new GoogleAuthProvider(),
+};
+
 export default function SignIn({}: SignInProps): JSX.Element {
+    const signIn = async () => {
+        signInWithPopup(auth, providers.google);
+    };
+
     return (
         <Paper elevation={0} component="main" data-testid={testId}>
             <Container
@@ -25,6 +33,7 @@ export default function SignIn({}: SignInProps): JSX.Element {
                         color="primary"
                         variant="contained"
                         // disableElevation
+                        onClick={signIn}
                     >
                         <GoogleIcon fontSize="small" sx={{ mr: 1 }} />
                         Sign in with Google

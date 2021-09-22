@@ -5,7 +5,13 @@ import { RootState } from '../app/store';
 
 import storageAPI from '../helpers/storageAPI';
 
-type UserType = User | null;
+interface ShortUser {
+    displayName: string | null;
+    photoURL: string | null;
+    uid: string;
+}
+
+type UserType = ShortUser | null;
 type ConnectionType = boolean;
 
 interface UserState {

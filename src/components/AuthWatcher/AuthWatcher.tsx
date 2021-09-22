@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, GoogleAuthProvider } from 'firebase/auth';
 import styled from 'styled-components';
 
 import { auth } from '../../app/firebase';
@@ -32,7 +32,18 @@ export default function AuthWatcher({
                 setInit(true);
             }
 
-            dispatch(changeUser(fUser));
+            if (!!fUser) {
+                const { displayName, photoURL, uid } = fUser;
+                const newUser = {
+                    uid,
+                    displayName,
+                    photoURL,
+                };
+
+                dispatch(changeUser(newUser));
+            } else {
+                dispatch(changeUser(null));
+            }
         });
 
         return unsubscribe;
