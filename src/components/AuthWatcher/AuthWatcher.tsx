@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { onAuthStateChanged, GoogleAuthProvider } from 'firebase/auth';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 import styled from 'styled-components';
 
 import { auth } from '../../app/firebase';
@@ -59,7 +59,12 @@ export default function AuthWatcher({
                         </li>
                         <li>
                             <strong>sign in</strong>:{' '}
-                            {!!currentUser?.toString() || 'false'}
+                            {(!!currentUser).toString()}
+                        </li>
+                        <li>
+                            <button onClick={signOut.bind(undefined, auth)}>
+                                signOut
+                            </button>
                         </li>
                     </ul>
                 </Status>
