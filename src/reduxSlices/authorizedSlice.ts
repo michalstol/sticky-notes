@@ -1,19 +1,12 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {
-    GoogleAuthProvider,
-    signInWithPopup,
-    signOut,
-    User,
-} from 'firebase/auth';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { User } from 'firebase/auth';
 
-import { RootState, AppThunk } from '../app/store';
-import { auth } from '../app/firebase';
+import { RootState } from '../app/store';
 
 import storageAPI from '../helpers/storageAPI';
 
 type UserType = User | null;
 type ConnectionType = boolean;
-type LoggedType = boolean;
 
 interface UserState {
     user: UserType;
@@ -26,10 +19,6 @@ interface AuthState extends UserState {
 const initialState: AuthState = {
     ...{ user: null, connected: false },
     ...(storageAPI.get<UserState>('auth') || {}),
-};
-
-const providers = {
-    google: new GoogleAuthProvider(),
 };
 
 export const authSlice = createSlice({
