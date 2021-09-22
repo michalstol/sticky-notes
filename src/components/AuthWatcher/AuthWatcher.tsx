@@ -58,13 +58,27 @@ export default function AuthWatcher({
 }
 
 const Status = styled.aside`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    font-size: 0.8em;
+    opacity: 0.3;
+
+    &:hover {
+        opacity: 1;
+    }
+
     ul {
+        margin: 0;
+        padding: 5px;
         list-style: none;
         display: flex;
         justify-content: space-between;
     }
 
     li {
+        text-align: center;
         flex: 1 1 auto;
     }
 `;
