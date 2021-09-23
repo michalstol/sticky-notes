@@ -2,19 +2,17 @@ import React from 'react';
 import {
     Route,
     Redirect,
-    RouteComponentProps,
     StaticContext,
+    RouteComponentProps,
+    RouteProps,
 } from 'react-router';
 import useAuth from '../../hooks/useAuth';
 
-export interface PrivateRouteProps {
-    path: string;
-    children: React.ReactNode;
-}
+interface PrivateRouteProps extends RouteProps {}
 
 export default function PrivateRoute({
-    path,
     children,
+    ...props
 }: PrivateRouteProps): JSX.Element {
     const { connected, logged } = useAuth();
 
@@ -50,5 +48,5 @@ export default function PrivateRoute({
         );
     };
 
-    return <Route path={path} render={redirectHandler} />;
+    return <Route {...props} render={redirectHandler} />;
 }

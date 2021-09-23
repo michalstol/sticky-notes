@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { Paper, Button, Grid, Avatar, Skeleton } from '@mui/material';
+import { Button, Grid, Avatar, Skeleton } from '@mui/material';
 import { Google as GoogleIcon } from '@mui/icons-material';
 
 import { auth } from '../../app/firebase';
@@ -40,47 +40,46 @@ export default function SignIn(): JSX.Element {
     }, [logged]);
 
     return (
-        <Paper elevation={0} component="main" data-testid={testId}>
-            <Container
-                container
-                direction="column"
-                justifyContent="center"
-                alignItems="center"
-                rowSpacing={3}
-            >
-                <Grid item xs={12}>
-                    <UserAvatar>
-                        {logged && !!user?.photoURL && (
-                            <Avatar
-                                alt={user.displayName || ''}
-                                src={user.photoURL}
-                            />
-                        )}
-                        {!logged && (
-                            <Skeleton
-                                variant="circular"
-                                animation="wave"
-                                width={avatarSize}
-                                height={avatarSize}
-                            />
-                        )}
-                    </UserAvatar>
-                </Grid>
+        <Container
+            container
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+            rowSpacing={3}
+            data-testid={testId}
+        >
+            <Grid item xs={12}>
+                <UserAvatar>
+                    {logged && !!user?.photoURL && (
+                        <Avatar
+                            alt={user.displayName || ''}
+                            src={user.photoURL}
+                        />
+                    )}
+                    {!logged && (
+                        <Skeleton
+                            variant="circular"
+                            animation="wave"
+                            width={avatarSize}
+                            height={avatarSize}
+                        />
+                    )}
+                </UserAvatar>
+            </Grid>
 
-                <Grid item xs={12}>
-                    <Button
-                        color="primary"
-                        variant="contained"
-                        // disableElevation
-                        onClick={signIn}
-                        disabled={pending}
-                    >
-                        <GoogleIcon fontSize="small" sx={{ mr: 1 }} />
-                        Sign in with Google
-                    </Button>
-                </Grid>
-            </Container>
-        </Paper>
+            <Grid item xs={12}>
+                <Button
+                    color="primary"
+                    variant="contained"
+                    // disableElevation
+                    onClick={signIn}
+                    disabled={pending}
+                >
+                    <GoogleIcon fontSize="small" sx={{ mr: 1 }} />
+                    Sign in with Google
+                </Button>
+            </Grid>
+        </Container>
     );
 }
 

@@ -1,40 +1,53 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import AuthWatcher from './components/AuthWatcher/AuthWatcher';
 import ConnectedRoute from './components/ConnectedRoute/ConnectedRoute';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import Connection from './views/Connection/Connection';
 import SignIn from './views/SignIn/SignIn';
+import View from './components/View/View';
+import SwitchGroup from './components/SwitchGroup/SwitchGroup';
 
 function App() {
     return (
         <div className="sticky-notes">
-            <AuthWatcher />
+            <AuthWatcher showState />
 
             <Router>
-                <>
-                    <Switch>
-                        <Route path="/" exact>
-                            {/* Firebase connection */}
+                <SwitchGroup>
+                    <Route path="/" exact>
+                        <View>
                             <Connection />
-                        </Route>
+                        </View>
+                    </Route>
 
-                        <ConnectedRoute path="/sign-in">
-                            {/* Authorization */}
+                    <ConnectedRoute path="/sign-in">
+                        <View>
                             <SignIn />
-                        </ConnectedRoute>
+                        </View>
+                    </ConnectedRoute>
 
-                        <PrivateRoute path="/dashboard">
-                            <h1>asd</h1>
-                            {/* Main view */}
-                        </PrivateRoute>
+                    <PrivateRoute path="/dashboard">
+                        <View>
+                            <h1 style={{ backgroundColor: 'red', margin: 0 }}>
+                                asd
+                            </h1>
+                        </View>
+                    </PrivateRoute>
 
-                        <ConnectedRoute path="/shared/:noteId">
-                            {/* Shared note */}
-                        </ConnectedRoute>
-                    </Switch>
-                </>
+                    <PrivateRoute path="/note">
+                        <View>
+                            <h1 style={{ backgroundColor: 'green', margin: 0 }}>
+                                dsa
+                            </h1>
+                        </View>
+                    </PrivateRoute>
+
+                    <ConnectedRoute path="/shared/:noteId">
+                        <p>asd</p>
+                    </ConnectedRoute>
+                </SwitchGroup>
             </Router>
         </div>
     );

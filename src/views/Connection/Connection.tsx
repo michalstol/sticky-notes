@@ -27,18 +27,17 @@ export default function Connection(): JSX.Element {
     }, [connected, history, redirectPath]);
 
     return (
-        <Paper elevation={0} component="main" data-testid={testId}>
-            <Container
-                container
-                direction="column"
-                justifyContent="center"
-                alignItems="center"
-            >
-                <Grid item xs={12}>
-                    <CircularProgress size="80px" />
-                </Grid>
-            </Container>
-        </Paper>
+        <Container
+            container
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+            data-testid={testId}
+        >
+            <Grid item xs={12}>
+                <CircularProgress size="80px" />
+            </Grid>
+        </Container>
     );
 }
 
