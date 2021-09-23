@@ -14,10 +14,11 @@ export default function Connection(): JSX.Element {
     const history = useHistory();
     const location = useLocation<LocationState>();
     const defaultFrom = { pathname: logged ? '/dashboard' : '/sign-in' };
+    const { from } = location.state || { from: { pathname: null } };
     const redirectPath =
-        location.state.from.pathname === '/sign-in' && logged
+        !from.pathname || (from.pathname === '/sign-in' && logged)
             ? defaultFrom
-            : location.state.from || defaultFrom;
+            : from || defaultFrom;
 
     useEffect(() => {
         setTimeout(() => {
