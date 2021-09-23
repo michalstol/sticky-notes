@@ -10,7 +10,7 @@ import SignIn from './views/SignIn/SignIn';
 function App() {
     return (
         <div className="sticky-notes">
-            <AuthWatcher showState />
+            <AuthWatcher />
 
             <Router>
                 <>
