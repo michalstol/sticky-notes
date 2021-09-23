@@ -13,6 +13,7 @@ export const testId = 'view--sign-in';
 
 export interface SignInProps {}
 
+const avatarSize = 96;
 const providers = {
     google: new GoogleAuthProvider(),
 };
@@ -44,8 +45,8 @@ export default function SignIn({}: SignInProps): JSX.Element {
                             <Skeleton
                                 variant="circular"
                                 animation="wave"
-                                width={96}
-                                height={96}
+                                width={avatarSize}
+                                height={avatarSize}
                             />
                         )}
                     </UserAvatar>
@@ -72,8 +73,8 @@ const Container = styled(Grid)`
 `;
 
 const UserAvatar = styled.figure`
-    width: 96px;
-    height: 96px;
+    width: ${avatarSize}px;
+    height: ${avatarSize}px;
     margin: 0;
 
     img,
