@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 import AuthWatcher from './components/AuthWatcher/AuthWatcher';
+import ConnectedRoute from './components/ConnectedRoute/ConnectedRoute';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import SignIn from './views/SignIn/SignIn';
 
 function App() {
@@ -16,12 +18,15 @@ function App() {
                             {/* Firebase connection */}
                         </Route>
 
-                        <Route path="/sign-in">
+                        <ConnectedRoute path="/sign-in">
                             {/* Authorization */}
                             <SignIn />
-                        </Route>
+                        </ConnectedRoute>
 
-                        <Route path="/dashboard">{/* Main view */}</Route>
+                        <PrivateRoute path="/dashboard">
+                            <h1>asd</h1>
+                            {/* Main view */}
+                        </PrivateRoute>
 
                         <Route path="/shared/:noteId">
                             {/* Shared note */}

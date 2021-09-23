@@ -11,8 +11,9 @@ interface ShortUser {
     uid: string;
 }
 
-type UserType = ShortUser | null;
-type ConnectionType = boolean;
+export type UserType = ShortUser | null;
+export type ConnectionType = boolean;
+export type LoggedType = boolean;
 
 interface UserState {
     user: UserType;
@@ -20,7 +21,7 @@ interface UserState {
 
 interface AuthState extends UserState {
     connected: ConnectionType;
-    logged: boolean;
+    logged: LoggedType;
 }
 
 const authFromStorage = storageAPI.get<UserState>('auth') || {};
@@ -51,6 +52,7 @@ export const authSlice = createSlice({
 });
 
 export const { changeUser, changeConnection } = authSlice.actions;
+export const selectAuth = (state: RootState) => state.auth;
 export const selectUser = (state: RootState) => state.auth.user;
 export const selectLogged = (state: RootState) => state.auth.logged;
 export const selectConnection = (state: RootState) => state.auth.connected;

@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useHistory, useLocation } from 'react-router';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { Paper, Button, Grid, Avatar, Skeleton } from '@mui/material';
 import { Google as GoogleIcon } from '@mui/icons-material';
 
 import { auth } from '../../app/firebase';
 import { useAppSelector } from '../../app/hooks';
-
-import { selectUser } from '../../reduxSlices/authorizedSlice';
+import useAuth from '../../hooks/useAuth';
 
 export const testId = 'view--sign-in';
 
 export interface SignInProps {}
+
+interface LocationState {
+    from: {
+        pathname: string;
+    };
+}
 
 const avatarSize = 96;
 const providers = {
@@ -19,10 +25,30 @@ const providers = {
 };
 
 export default function SignIn({}: SignInProps): JSX.Element {
-    const user = useAppSelector(selectUser);
+    const history = useHistory();
+    const location = useLocation<LocationState>();
+    const { from } = location.state || { from: { pathname: '/dashboard' } };
+
+    const [connected, logged, user] = useAuth();
+    const [pending, setPending] = useState(logged);
+
     const signIn = async () => {
-        signInWithPopup(auth, providers.google);
+        setPending(true);
+
+        signInWithPopup(auth, providers.google)
+            .then(result => {
+                if (!result.user) return undefined;
+
+                setTimeout(() => {
+                    history.replace(from);
+                }, 1000);
+            })
+            .catch(err => console.warn(err));
     };
+
+    useEffect(() => {
+        setPending(logged);
+    }, [logged]);
 
     return (
         <Paper elevation={0} component="main" data-testid={testId}>
@@ -35,13 +61,13 @@ export default function SignIn({}: SignInProps): JSX.Element {
             >
                 <Grid item xs={12}>
                     <UserAvatar>
-                        {!!user && !!user.photoURL && (
+                        {logged && !!user?.photoURL && (
                             <Avatar
                                 alt={user.displayName || ''}
                                 src={user.photoURL}
                             />
                         )}
-                        {!user && (
+                        {!logged && (
                             <Skeleton
                                 variant="circular"
                                 animation="wave"
@@ -58,6 +84,7 @@ export default function SignIn({}: SignInProps): JSX.Element {
                         variant="contained"
                         // disableElevation
                         onClick={signIn}
+                        disabled={pending}
                     >
                         <GoogleIcon fontSize="small" sx={{ mr: 1 }} />
                         Sign in with Google
