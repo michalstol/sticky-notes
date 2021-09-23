@@ -20,11 +20,14 @@ interface UserState {
 
 interface AuthState extends UserState {
     connected: ConnectionType;
+    logged: boolean;
 }
 
+const authFromStorage = storageAPI.get<UserState>('auth') || {};
 const initialState: AuthState = {
-    ...{ user: null, connected: false },
-    ...(storageAPI.get<UserState>('auth') || {}),
+    ...{ user: null, connected: false, logged: false },
+    user: authFromStorage?.user || null,
+    logged: !!authFromStorage?.user,
 };
 
 export const authSlice = createSlice({
@@ -36,7 +39,7 @@ export const authSlice = createSlice({
                 user,
             });
 
-            return { ...state, user };
+            return { ...state, user, logged: !!user };
         },
         changeConnection: (
             state,
@@ -49,6 +52,7 @@ export const authSlice = createSlice({
 
 export const { changeUser, changeConnection } = authSlice.actions;
 export const selectUser = (state: RootState) => state.auth.user;
+export const selectLogged = (state: RootState) => state.auth.logged;
 export const selectConnection = (state: RootState) => state.auth.connected;
 
 export default authSlice.reducer;

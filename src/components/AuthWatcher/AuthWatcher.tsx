@@ -9,6 +9,7 @@ import {
     changeUser,
     changeConnection,
     selectUser,
+    selectLogged,
     selectConnection,
 } from '../../reduxSlices/authorizedSlice';
 
@@ -22,6 +23,7 @@ export default function AuthWatcher({
     const dispatch = useAppDispatch();
     const connected = useAppSelector(selectConnection);
     const currentUser = useAppSelector(selectUser);
+    const logged = useAppSelector(selectLogged);
 
     const [init, setInit] = useState(false);
 
@@ -58,8 +60,7 @@ export default function AuthWatcher({
                             <strong>connected</strong>: {connected.toString()}
                         </li>
                         <li>
-                            <strong>sign in</strong>:{' '}
-                            {(!!currentUser).toString()}
+                            <strong>sign in</strong>: {logged.toString()}
                         </li>
                         <li>
                             <button onClick={signOut.bind(undefined, auth)}>
