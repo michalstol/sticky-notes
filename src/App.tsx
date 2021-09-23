@@ -1,9 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import AuthWatcher from './components/AuthWatcher/AuthWatcher';
 import ConnectedRoute from './components/ConnectedRoute/ConnectedRoute';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import Connection from './views/Connection/Connection';
 import SignIn from './views/SignIn/SignIn';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
                     <Switch>
                         <Route path="/" exact>
                             {/* Firebase connection */}
+                            <Connection />
                         </Route>
 
                         <ConnectedRoute path="/sign-in">
@@ -28,9 +30,9 @@ function App() {
                             {/* Main view */}
                         </PrivateRoute>
 
-                        <Route path="/shared/:noteId">
+                        <ConnectedRoute path="/shared/:noteId">
                             {/* Shared note */}
-                        </Route>
+                        </ConnectedRoute>
                     </Switch>
                 </>
             </Router>

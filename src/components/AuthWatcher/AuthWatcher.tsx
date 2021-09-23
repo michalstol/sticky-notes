@@ -1,37 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import styled from 'styled-components';
 
 import { auth } from '../../app/firebase';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useAppDispatch } from '../../app/hooks';
+import useAuth from '../../hooks/useAuth';
 
 import {
     changeUser,
     changeConnection,
-    selectUser,
-    selectLogged,
-    selectConnection,
 } from '../../reduxSlices/authorizedSlice';
 
 interface AuthWatcherProps {
     showState?: boolean;
 }
 
+let singletonInstance = false;
+
 export default function AuthWatcher({
     showState = false,
 }: AuthWatcherProps): JSX.Element {
     const dispatch = useAppDispatch();
-    const connected = useAppSelector(selectConnection);
-    const currentUser = useAppSelector(selectUser);
-    const logged = useAppSelector(selectLogged);
-
-    const [init, setInit] = useState(false);
+    const { connected, logged } = useAuth();
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, fUser => {
-            if (!init) {
+            if (!singletonInstance) {
+                singletonInstance = true;
                 dispatch(changeConnection(true));
-                setInit(true);
             }
 
             if (!!fUser) {
@@ -49,7 +45,7 @@ export default function AuthWatcher({
         });
 
         return unsubscribe;
-    }, []);
+    }, [dispatch]);
 
     return (
         <>

@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { User } from 'firebase/auth';
 
 import { RootState } from '../app/store';
 
@@ -19,7 +18,7 @@ interface UserState {
     user: UserType;
 }
 
-interface AuthState extends UserState {
+export interface AuthState extends UserState {
     connected: ConnectionType;
     logged: LoggedType;
 }

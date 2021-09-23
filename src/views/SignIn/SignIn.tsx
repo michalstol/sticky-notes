@@ -1,35 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory } from 'react-router';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { Paper, Button, Grid, Avatar, Skeleton } from '@mui/material';
 import { Google as GoogleIcon } from '@mui/icons-material';
 
 import { auth } from '../../app/firebase';
-import { useAppSelector } from '../../app/hooks';
 import useAuth from '../../hooks/useAuth';
 
 export const testId = 'view--sign-in';
-
-export interface SignInProps {}
-
-interface LocationState {
-    from: {
-        pathname: string;
-    };
-}
 
 const avatarSize = 96;
 const providers = {
     google: new GoogleAuthProvider(),
 };
 
-export default function SignIn({}: SignInProps): JSX.Element {
+export default function SignIn(): JSX.Element {
     const history = useHistory();
-    const location = useLocation<LocationState>();
-    const { from } = location.state || { from: { pathname: '/dashboard' } };
 
-    const [connected, logged, user] = useAuth();
+    const { logged, user } = useAuth();
     const [pending, setPending] = useState(logged);
 
     const signIn = async () => {
@@ -40,7 +29,7 @@ export default function SignIn({}: SignInProps): JSX.Element {
                 if (!result.user) return undefined;
 
                 setTimeout(() => {
-                    history.replace(from);
+                    history.replace({ pathname: '/dashboard' });
                 }, 1000);
             })
             .catch(err => console.warn(err));

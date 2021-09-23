@@ -16,7 +16,7 @@ export default function ConnectedRoute({
     path,
     children,
 }: ConnectedRouteProps): JSX.Element {
-    const [connected] = useAuth();
+    const { connected } = useAuth();
 
     const redirectHandler = ({
         location,
@@ -30,14 +30,6 @@ export default function ConnectedRoute({
         return (
             <>
                 {connected && children}
-                {connected && (
-                    <Redirect
-                        to={{
-                            pathname: '/sign-in',
-                            state: { from: location },
-                        }}
-                    />
-                )}
                 {!connected && (
                     <Redirect
                         to={{

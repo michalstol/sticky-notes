@@ -16,7 +16,7 @@ export default function PrivateRoute({
     path,
     children,
 }: PrivateRouteProps): JSX.Element {
-    const [connected, logged] = useAuth();
+    const { connected, logged } = useAuth();
 
     const redirectHandler = ({
         location,
