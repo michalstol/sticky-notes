@@ -2,19 +2,22 @@ import React from 'react';
 import {
     Route,
     Redirect,
-    RouteComponentProps,
     StaticContext,
+    RouteComponentProps,
+    RouteProps,
 } from 'react-router';
-import useAuth from '../../hooks/useAuth';
 
-export interface ConnectedRouteProps {
-    path: string;
-    children: React.ReactNode;
+import useAuth from '../../hooks/useAuth';
+import { connectedPaths } from '../../types/routingPaths';
+
+export interface ConnectedRouteProps extends RouteProps {
+    path: connectedPaths;
 }
 
 export default function ConnectedRoute({
     path,
     children,
+    ...props
 }: ConnectedRouteProps): JSX.Element {
     const { connected } = useAuth();
 
@@ -42,5 +45,5 @@ export default function ConnectedRoute({
         );
     };
 
-    return <Route path={path} render={redirectHandler} />;
+    return <Route path={path} render={redirectHandler} {...props} />;
 }

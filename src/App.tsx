@@ -12,7 +12,7 @@ import SwitchGroup from './components/SwitchGroup/SwitchGroup';
 function App() {
     return (
         <div className="sticky-notes">
-            <AuthWatcher showState />
+            <AuthWatcher />
 
             <Router>
                 <SwitchGroup>
