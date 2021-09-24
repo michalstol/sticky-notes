@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from '../../app/store';
 
-import Note, { NoteRedux } from '../../types/note';
+import { NoteRedux } from '../../types/note';
 
 import fetchNotesAsync from '../actions/fetchNotesAsync';
 import addNoteAsync from '../actions/addNoteAsync';
