@@ -59,6 +59,6 @@ const Container = styled(motion.div)`
 `;
 
 const Main = styled.main`
-    position: re;
+    position: relative;
     min-height: 100%;
 `;
