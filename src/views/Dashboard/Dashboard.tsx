@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { serverTimestamp } from 'firebase/firestore';
 import styled from 'styled-components';
 import {
@@ -21,6 +20,8 @@ import { useAppDispatch } from '../../app/hooks';
 
 import fetchNotesAsync from '../../redux/actions/fetchNotesAsync';
 import addNoteAsync from '../../redux/actions/addNoteAsync';
+
+import ListOfNotes from '../ListOfNotes/ListOfNotes';
 
 interface DashboardProps {}
 interface HideOnScrollProps {
@@ -63,8 +64,8 @@ export default function Dashboard({}: DashboardProps): JSX.Element {
                                         uid,
                                         note: {
                                             status: 'active',
-                                            priority: 'normal',
-                                            title: 'Test title',
+                                            priority: 'high',
+                                            title: 'Te2 13 st title asda sd s',
                                             createdBy: uid,
                                             createdAt: serverTimestamp(),
                                         },
@@ -94,7 +95,8 @@ export default function Dashboard({}: DashboardProps): JSX.Element {
 
             <Toolbar />
 
-            <Container></Container>
+            {/* <Container></Container> */}
+            <ListOfNotes />
         </>
     );
 }

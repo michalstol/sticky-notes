@@ -7,6 +7,8 @@ import { NoteRedux } from '../../types/note';
 import fetchNotesAsync from '../actions/fetchNotesAsync';
 import addNoteAsync from '../actions/addNoteAsync';
 
+import sortNotes from '../../helpers/sortNotes';
+
 type Status = 'idle' | 'loading' | 'failed';
 
 interface NotesState {
@@ -30,7 +32,13 @@ export const notesSlice = createSlice({
                 return { ...state, status: 'loading' };
             })
             .addCase(fetchNotesAsync.fulfilled, (state, action) => {
-                return { ...state, status: 'idle', data: [...action.payload] };
+                const sortMethod = sortNotes();
+
+                return {
+                    ...state,
+                    status: 'idle',
+                    data: [...[...action.payload].sort(sortMethod)],
+                };
             })
             .addCase(fetchNotesAsync.rejected, state => {
                 return { ...state, status: 'failed' };
