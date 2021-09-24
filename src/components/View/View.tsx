@@ -13,7 +13,7 @@ const viewSettings = {
     variants: {
         initial: {
             opacity: 0,
-            scale: 0.98,
+            scale: 0.99,
         },
         in: {
             opacity: 1,
@@ -21,13 +21,13 @@ const viewSettings = {
         },
         out: {
             opacity: 0,
-            scale: 0.98,
+            scale: 0.99,
         },
     },
     transition: {
         type: 'tween',
         ease: 'anticipate',
-        duration: 0.2,
+        duration: 0.3,
     },
 };
 
@@ -48,13 +48,13 @@ export default function View({ children }: ViewProps): JSX.Element {
 }
 
 const Container = styled(motion.div)`
-    position: absolute;
+    /* position: absolute; */
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    overflow-y: auto;
+    /* height: 100vh; */
+    /* overflow: hidden; */
+    /* overflow-y: auto; */
     z-index: 1;
 `;
 

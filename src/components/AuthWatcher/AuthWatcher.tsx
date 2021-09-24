@@ -9,7 +9,7 @@ import useAuth from '../../hooks/useAuth';
 import {
     changeUser,
     changeConnection,
-} from '../../reduxSlices/authorizedSlice';
+} from '../../redux/slices/authorizedSlice';
 
 interface AuthWatcherProps {
     showState?: boolean;

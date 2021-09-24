@@ -6,13 +6,15 @@ interface SwitchGroupProps {
     children: React.ReactNode;
 }
 
+export const testId = 'switch-group';
+
 export default function SwitchGroup({
     children,
 }: SwitchGroupProps): JSX.Element {
     const location = useLocation();
 
     return (
-        <AnimatePresence exitBeforeEnter initial={false}>
+        <AnimatePresence exitBeforeEnter initial={false} data-testid={testId}>
             <Switch location={location} key={location.pathname}>
                 {children}
             </Switch>

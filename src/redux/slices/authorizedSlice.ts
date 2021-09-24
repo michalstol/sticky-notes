@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { RootState } from '../app/store';
+import { RootState } from '../../app/store';
 
-import storageAPI from '../helpers/storageAPI';
+import storageAPI from '../../helpers/storageAPI';
 
 interface ShortUser {
     displayName: string | null;
@@ -21,6 +21,12 @@ interface UserState {
 export interface AuthState extends UserState {
     connected: ConnectionType;
     logged: LoggedType;
+}
+
+export interface StrictAuthState {
+    connected: ConnectionType;
+    logged: LoggedType;
+    user: ShortUser;
 }
 
 const authFromStorage = storageAPI.get<UserState>('auth') || {};

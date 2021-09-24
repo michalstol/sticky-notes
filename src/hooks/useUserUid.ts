@@ -1,5 +1,5 @@
 import { useAppSelector } from '../app/hooks';
-import { selectUser } from '../reduxSlices/authorizedSlice';
+import { selectUser } from '../redux/slices/authorizedSlice';
 
 export default function useUserUid(): null | string {
     const user = useAppSelector(selectUser);

@@ -1,11 +1,13 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
+import Connection from './views/Connection/Connection';
+import SignIn from './views/SignIn/SignIn';
+import Dashboard from './views/Dashboard/Dashboard';
 
 import AuthWatcher from './components/AuthWatcher/AuthWatcher';
 import ConnectedRoute from './components/ConnectedRoute/ConnectedRoute';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
-import Connection from './views/Connection/Connection';
-import SignIn from './views/SignIn/SignIn';
 import View from './components/View/View';
 import SwitchGroup from './components/SwitchGroup/SwitchGroup';
 
@@ -15,6 +17,10 @@ function App() {
             <AuthWatcher />
 
             <Router>
+                {/* <div style={{ position: 'fixed', zIndex: 9999 }}>
+                    <Link to="/dashboard">D</Link> | <Link to="/note">N</Link>
+                </div> */}
+
                 <SwitchGroup>
                     <Route path="/" exact>
                         <View>
@@ -30,9 +36,7 @@ function App() {
 
                     <PrivateRoute path="/dashboard">
                         <View>
-                            <h1 style={{ backgroundColor: 'red', margin: 0 }}>
-                                asd
-                            </h1>
+                            <Dashboard />
                         </View>
                     </PrivateRoute>
 

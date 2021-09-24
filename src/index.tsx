@@ -7,14 +7,16 @@ import './styles/index.scss';
 
 import { store } from './app/store';
 import App from './App';
-import { CssBaseline } from '@mui/material';
+import { CssBaseline, StyledEngineProvider } from '@mui/material';
 
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
-            <CssBaseline>
-                <App />
-            </CssBaseline>
+            <StyledEngineProvider injectFirst>
+                <CssBaseline>
+                    <App />
+                </CssBaseline>
+            </StyledEngineProvider>
         </Provider>
     </React.StrictMode>,
     document.getElementById('root')
