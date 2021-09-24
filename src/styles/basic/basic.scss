@@ -1,3 +1,7 @@
+* {
+    overscroll-behavior: contain;
+}
+
 .sticky-notes {
     position: relative;
     min-height: 100vh;
