@@ -1,4 +1,4 @@
-import { CircularProgress, Grid, Paper } from '@mui/material';
+import { CircularProgress, Grid } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import styled from 'styled-components';
