@@ -2,15 +2,15 @@ import React, { useEffect } from 'react';
 import { serverTimestamp } from 'firebase/firestore';
 import styled from 'styled-components';
 import {
-    Box,
+    // Box,
     AppBar,
     Avatar,
-    Container,
+    // Container,
     IconButton,
     InputBase,
     Slide,
     Toolbar,
-    Typography,
+    // Typography,
     useScrollTrigger,
 } from '@mui/material';
 import { MenuSharp as IconMenu } from '@mui/icons-material';
@@ -48,7 +48,7 @@ export default function Dashboard({}: DashboardProps): JSX.Element {
 
     useEffect(() => {
         dispatch(fetchNotesAsync({ uid }));
-    }, [uid]);
+    }, [uid, dispatch]);
 
     return (
         <>

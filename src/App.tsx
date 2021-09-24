@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Connection from './views/Connection/Connection';
 import SignIn from './views/SignIn/SignIn';
@@ -17,10 +17,6 @@ function App() {
             <AuthWatcher />
 
             <Router>
-                {/* <div style={{ position: 'fixed', zIndex: 9999 }}>
-                    <Link to="/dashboard">D</Link> | <Link to="/note">N</Link>
-                </div> */}
-
                 <SwitchGroup>
                     <Route path="/" exact>
                         <View>
