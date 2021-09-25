@@ -24,7 +24,11 @@ const initialState: NotesState = {
 export const notesSlice = createSlice({
     name: 'notes',
     initialState,
-    reducers: {},
+    reducers: {
+        cleanData: state => {
+            return { ...state, data: null };
+        },
+    },
     extraReducers: builder => {
         builder
             // fetchNotesAsync
@@ -59,6 +63,8 @@ export const notesSlice = createSlice({
             });
     },
 });
+
+export const { cleanData } = notesSlice.actions;
 
 export const selectNotes = (state: RootState) => state.notes;
 export const selectStatus = (state: RootState) => state.notes.status;
